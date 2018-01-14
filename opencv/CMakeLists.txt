@@ -1,23 +1,20 @@
 cmake_minimum_required (VERSION 2.6)
-include(ExternalProject)
+
 project(Display)
 
-ExternalProject_Add(
-    opencv
-    GIT_REPOSITORY https://github.com/opencv/opencv
-    GIT_TAG "master"
+configure_file(CMakeLists.txt.in opencv-download/CMakeLists.txt)
 
-    PREFIX ${CMAKE_BINARY_DIR}/opencv
-    CMAKE_ARGS -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-    )
+execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv-download")
 
+execute_process(COMMAND "${CMAKE_COMMAND}" --build .
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv-download")
 
-#set(opencv_INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/external/opencv/include")
-#set(opencv_LIBRARIES "${CMAKE_SHARED_LIBRARY_PREFIX}opencv${CMAKE_SHARED_LIBRARY_SUFFIX}")
-#include_directories(${opencv_INCLUDE_DIRS})
-ExternalProject_Get_Property(opencv install_dir)
-include_directories(${install_dir}/include)
-
+add_subdirectory("${CMAKE_BINARY_DIR}/opencv-src"
+                 "${CMAKE_BINARY_DIR}/opencv-build"
+)
+set(OpenCV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build_dir/")
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(display display.cpp)
-add_dependencies(display opencv)
-target_link_libraries(display ${opencv_LIBS})
+target_link_libraries(display ${OpenCV_LIBS})
