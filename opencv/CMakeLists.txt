@@ -2,7 +2,7 @@ cmake_minimum_required (VERSION 2.6)
 
 project(Display)
 
-configure_file(CMakeLists.txt.in opencv-download/CMakeLists.txt)
+configure_file(OpenCV.txt.in opencv-download/CMakeLists.txt)
 
 execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv-download")
