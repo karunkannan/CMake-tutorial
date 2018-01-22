@@ -18,4 +18,19 @@ ExternalProject_Add(
         -DBUILD_opencv_flann:BOOL=OFF"
 )
 
+list(APPEND
+    CMAKE_ARGS
+    "-DOPENCV_EXTRA_MODULES_PATH=<opencv_contrib>/modules
+    -DBUILD_opencv_flann:BOOL=OFF
+    -DBUILD_opencv_features2d:BOOL=OFF
+    -DBUILD_opencv_calib3d:BOOL=OFF
+    -DBUILD_opencv_ml:BOOL=OFF
+    -DBUILD_opencv_video:BOOL=OFF
+    -DBUILD_opencv_shape:BOOL=OFF
+    -DBUILD_opencv_xfeatures2d:BOOL=OFF
+    -DBUILD_opencv_stitching:BOOL=OFF
+    -DBUILD_opencv_saliency:BOOL=OFF
+    -DBUILD_opencv_dnn:BOOL=OFF"
+    )
+
 
