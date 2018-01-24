@@ -11,7 +11,6 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build .
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv-download")
 
 
-
 configure_file(OpenCV_contrib.cmake opencv_contrib-download/CMakeLists.txt)
 
 execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
@@ -20,6 +19,8 @@ execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
 execute_process(COMMAND "${CMAKE_COMMAND}" --build .
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv_contrib-download")
 
+#test if you need to build as well
+#test order
 add_subdirectory("${CMAKE_BINARY_DIR}/opencv-src/"
                  "${CMAKE_BINARY_DIR}/opencv-build/"
 )

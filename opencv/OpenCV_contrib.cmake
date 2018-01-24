@@ -7,9 +7,5 @@ ExternalProject_Add(
     GIT_REPOSITORY "https://github.com/opencv/opencv_contrib"
     GIT_TAG "3.4.0"
 
-    SOURCE_DIR "${CMAKE_BINARY_DIR}/opencv-src"
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ""
-    TEST_COMMAND ""
+    SOURCE_DIR "${CMAKE_BINARY_DIR}/opencv_contrib-src"
 )
