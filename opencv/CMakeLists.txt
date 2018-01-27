@@ -2,6 +2,15 @@ cmake_minimum_required (VERSION 2.6)
 
 project(Display)
 
+configure_file(OpenCV_contrib.cmake opencv_contrib-download/CMakeLists.txt)
+
+execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv_contrib-download")
+
+execute_process(COMMAND "${CMAKE_COMMAND}" --build .
+    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv_contrib-download")
+
+
 configure_file(OpenCV.cmake opencv-download/CMakeLists.txt)
 
 execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
@@ -11,13 +20,6 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build .
     WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv-download")
 
 
-configure_file(OpenCV_contrib.cmake opencv_contrib-download/CMakeLists.txt)
-
-execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
-    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv_contrib-download")
-
-execute_process(COMMAND "${CMAKE_COMMAND}" --build .
-    WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv_contrib-download")
 
 #test if you need to build as well
 #test order
@@ -27,7 +29,7 @@ add_subdirectory("${CMAKE_BINARY_DIR}/opencv-src/"
 
 
 
-set(OpenCV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build_dir/")
+set(OpenCV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build_dir/opencv-build/")
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(display display.cpp)
