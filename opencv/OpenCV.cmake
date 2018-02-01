@@ -32,7 +32,7 @@ ExternalProject_Add(
         "-DBUILD_opencv_superres:BOOL=OFF"
         "-DBUILD_opencv_ts:BOOL=OFF"
         "-DBUILD_opencv_video:BOOL=OFF"
-        "-DBUILD_opencv_videoio:BOOL=OFF"
+        "-DBUILD_opencv_videoio:BOOL=ON"
         "-DBUILD_opencv_world:BOOL=OFF"
         "-DBUILD_opencv_xfeatures2d:BOOL=OFF"
         "-DOPENCV_EXTRA_MODULES_PATH:PATH=${CMAKE_BINARY_DIR}/opencv_contrib-src/modules"
