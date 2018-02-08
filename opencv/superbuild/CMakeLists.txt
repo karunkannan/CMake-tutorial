@@ -1,11 +1,5 @@
 cmake_minimum_required (VERSION 3.6)
 
-set(ES_BUILD_DIR display_build)
-# get_filename_component(result ${ES_BUILD_DIR} ABSOLUTE)
-# if (${CMAKE_CURRENT_BINARY_DIR} STREQUAL ${result})
-#   # message(FATAL_ERROR "Choose a binary folder other than '${result}'!")
-# endif ()
-
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/libraries" CACHE PATH "Path where to install binaries")
 
 project(display-Superbuild)
@@ -29,7 +23,7 @@ set(ES_DEPENDS "")
 include(OpenCV-External.cmake)
 include(clBLAS-External.cmake)
 
-file(REMOVE "${ES_BUILD_DIR}/CMakeCache.txt")
+set(ES_BUILD_DIR display_build)
 
 ExternalProject_Add(display
   DEPENDS          ${ES_DEPENDS}
