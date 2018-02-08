@@ -5,6 +5,11 @@ list(APPEND
   opencv
 )
 
+set(OPENCV_DOWNLOAD_URL "https://github.com/opencv/opencv/archive/3.4.0.tar.gz")
+set(OPENCV_DOWNLOAD_NANE "opencv-3.4.0.tar.gz")
+set(OPENCV_EXTRA_DOWNLOAD_URL "https://github.com/opencv/opencv_contrib/archive/3.4.0.tar.gz")
+set(OPENCV_EXTRA_DOWNLOAD_NANE "opencv_contrib-3.4.0.tar.gz")
+
 set(OPENCV_CMAKE_ARGS 
   -DBUILD_DOCS:BOOL=OFF
   -DBUILD_TESTS:BOOL=OFF
@@ -59,9 +64,9 @@ include(ExternalProject)
 
 # OpenCV contrib
 ExternalProject_Add(opencv-contrib-download
-  URL                  "https://github.com/opencv/opencv_contrib/archive/3.4.0.tar.gz"
+  URL                  ${OPENCV_EXTRA_DOWNLOAD_URL}
   # URL_HASH             MD5=
-  DOWNLOAD_NAME        "opencv_contrib-3.4.0.tar.gz"
+  DOWNLOAD_NAME        ${OPENCV_EXTRA_DOWNLOAD_URL}
   DOWNLOAD_DIR         ${ES_DEPENDS_DOWNLOAD_DIR}
   DOWNLOAD_NO_PROGRESS 1
   SOURCE_DIR           "${ES_DEPENDS_DOWNLOAD_DIR}/opencv_contrib"
@@ -119,9 +124,9 @@ message( "OPENCV_CMAKE_ARGS = ${OPENCV_CMAKE_ARGS}")
 
 set(_config ${CMAKE_BUILD_TYPE})
 ExternalProject_Add(opencv
-  URL                  "https://github.com/opencv/opencv/archive/3.4.0.tar.gz"
+  URL                  ${OPENCV_DOWNLOAD_URL}
   # URL_HASH             MD5=
-  DOWNLOAD_NAME        "opencv-3.4.0.tar.gz"
+  DOWNLOAD_NAME        ${OPENCV_DOWNLOAD_NANE}
   DOWNLOAD_DIR         ${ES_DEPENDS_DOWNLOAD_DIR}
   DOWNLOAD_NO_PROGRESS 1
   SOURCE_DIR           "${ES_DEPENDS_DOWNLOAD_DIR}/opencv"
@@ -131,7 +136,7 @@ ExternalProject_Add(opencv
   PATCH_COMMAND        ""
   INSTALL_COMMAND      ""
   TEST_COMMAND         ""
-  CMAKE_ARGS          
+  CMAKE_ARGS
     -DCMAKE_BUILD_TYPE:STRING=${_config}
     ${OPENCV_CMAKE_ARGS}
   BUILD_COMMAND        ${CMAKE_COMMAND} -E echo "====================== Starting ${_config} build of OpenCV ======================"

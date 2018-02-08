@@ -5,10 +5,13 @@ list(APPEND
   clblas
 )
 
+set(CLBLAS_DOWNLOAD_URL "https://github.com/clMathLibraries/clBLAS/releases/download/v2.12/clBLAS-2.12.0-Linux-x64.tar.gz")
+set(CLBLAS_DOWNLOAD_NANE "clBLAS-2.12.0-Linux-x64.tar.gz")
+
 ExternalProject_Add(clblas
-  URL                  "https://github.com/clMathLibraries/clBLAS/releases/download/v2.12/clBLAS-2.12.0-Linux-x64.tar.gz"
+  URL                  ${CLBLAS_DOWNLOAD_URL}
   # URL_HASH             MD5=
-  DOWNLOAD_NAME        "clBLAS-2.12.0-Linux-x64.tar.gz"
+  DOWNLOAD_NAME        ${CLBLAS_DOWNLOAD_NANE}
   DOWNLOAD_DIR         ${ES_DEPENDS_DOWNLOAD_DIR}
   DOWNLOAD_NO_PROGRESS 1
   SOURCE_DIR           "${ES_DEPENDS_DOWNLOAD_DIR}/clBLAS"
