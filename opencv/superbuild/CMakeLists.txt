@@ -1,5 +1,11 @@
 cmake_minimum_required (VERSION 3.6)
 
+set(ES_BUILD_DIR display_build)
+# get_filename_component(result ${ES_BUILD_DIR} ABSOLUTE)
+# if (${CMAKE_CURRENT_BINARY_DIR} STREQUAL ${result})
+#   # message(FATAL_ERROR "Choose a binary folder other than '${result}'!")
+# endif ()
+
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/libraries" CACHE PATH "Path where to install binaries")
 
 project(display-Superbuild)
@@ -17,17 +23,23 @@ message( "Processors = ${NUMBER_OF_PROCESSORS}")
 
 include(ExternalProject)
 
+set(ES_DEPENDS "")
+
 # OpenCV
 include(OpenCV-External.cmake)
+include(clBLAS-External.cmake)
+
+file(REMOVE "${ES_BUILD_DIR}/CMakeCache.txt")
 
 ExternalProject_Add(display
-  DEPENDS          opencv
+  DEPENDS          ${ES_DEPENDS}
   DOWNLOAD_COMMAND ""
   UPDATE_COMMAND   ""
   PATCH_COMMAND    ""
   SOURCE_DIR       ${CMAKE_CURRENT_SOURCE_DIR}/..
-  BINARY_DIR       ${CMAKE_CURRENT_SOURCE_DIR}/../build
+  BINARY_DIR       ${ES_BUILD_DIR}
   CMAKE_ARGS       -DOpenCV_DIR:PATH=${OpenCV_DIR}
+                   -DclBLAS_DIR:PATH=${clBLAS_DIR}
   INSTALL_COMMAND  ""
 )
 

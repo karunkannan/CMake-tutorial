@@ -1,4 +1,9 @@
-message("External project - OpenCV")
+message("\nExternal project - OpenCV")
+
+list(APPEND
+  ES_DEPENDS
+  opencv
+)
 
 set(OPENCV_CMAKE_ARGS 
   -DBUILD_DOCS:BOOL=OFF
@@ -135,9 +140,9 @@ ExternalProject_Add(opencv
 )
 
 ExternalProject_Get_Property(opencv BINARY_DIR)
-message( "opencv build = ${BINARY_DIR}")
 
 set(OpenCV_DIR ${BINARY_DIR} CACHE PATH "OpenCV build directory")
+message( "opencv build = ${OpenCV_DIR}")
 
 
 # EOF
