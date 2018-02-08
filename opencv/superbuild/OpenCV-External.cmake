@@ -5,10 +5,17 @@ list(APPEND
   opencv
 )
 
-set(OPENCV_DOWNLOAD_URL "https://github.com/opencv/opencv/archive/3.4.0.tar.gz")
-set(OPENCV_DOWNLOAD_NANE "opencv-3.4.0.tar.gz")
-set(OPENCV_EXTRA_DOWNLOAD_URL "https://github.com/opencv/opencv_contrib/archive/3.4.0.tar.gz")
-set(OPENCV_EXTRA_DOWNLOAD_NANE "opencv_contrib-3.4.0.tar.gz")
+if (WIN32)
+  set(OPENCV_DOWNLOAD_URL "https://github.com/opencv/opencv/archive/3.4.0.zip")
+  set(OPENCV_DOWNLOAD_NANE "opencv-3.4.0.zpi")
+  set(OPENCV_EXTRA_DOWNLOAD_URL "https://github.com/opencv/opencv_contrib/archive/3.4.0.zip")
+  set(OPENCV_EXTRA_DOWNLOAD_NANE "opencv_contrib-3.4.0.zip")
+else (WIN32)
+  set(OPENCV_DOWNLOAD_URL "https://github.com/opencv/opencv/archive/3.4.0.tar.gz")
+  set(OPENCV_DOWNLOAD_NANE "opencv-3.4.0.tar.gz")
+  set(OPENCV_EXTRA_DOWNLOAD_URL "https://github.com/opencv/opencv_contrib/archive/3.4.0.tar.gz")
+  set(OPENCV_EXTRA_DOWNLOAD_NANE "opencv_contrib-3.4.0.tar.gz")
+endif (WIN32)
 
 set(OPENCV_CMAKE_ARGS 
   -DBUILD_DOCS:BOOL=OFF

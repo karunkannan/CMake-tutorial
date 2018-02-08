@@ -5,8 +5,13 @@ list(APPEND
   clblas
 )
 
-set(CLBLAS_DOWNLOAD_URL "https://github.com/clMathLibraries/clBLAS/releases/download/v2.12/clBLAS-2.12.0-Linux-x64.tar.gz")
-set(CLBLAS_DOWNLOAD_NANE "clBLAS-2.12.0-Linux-x64.tar.gz")
+if (WIN32)
+  set(CLBLAS_DOWNLOAD_URL "https://github.com/clMathLibraries/clBLAS/releases/download/v2.12/clBLAS-2.12.0-Windows-x64.zip")
+  set(CLBLAS_DOWNLOAD_NANE "clBLAS-2.12.0-Windows-x64.zip")
+else (WIN32)
+  set(CLBLAS_DOWNLOAD_URL "https://github.com/clMathLibraries/clBLAS/releases/download/v2.12/clBLAS-2.12.0-Linux-x64.tar.gz")
+  set(CLBLAS_DOWNLOAD_NANE "clBLAS-2.12.0-Linux-x64.tar.gz")
+endif (WIN32)
 
 ExternalProject_Add(clblas
   URL                  ${CLBLAS_DOWNLOAD_URL}
