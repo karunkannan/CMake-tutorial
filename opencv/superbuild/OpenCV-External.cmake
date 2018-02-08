@@ -133,8 +133,10 @@ ExternalProject_Add(opencv
   COMMAND              ${CMAKE_COMMAND} --build . --config ${_config} -- -j${NUMBER_OF_PROCESSORS}
   COMMAND              ${CMAKE_COMMAND} -E echo "====================== ${_config} build of OpenCV complete ======================"
 )
+
 ExternalProject_Get_Property(opencv BINARY_DIR)
 message( "opencv build = ${BINARY_DIR}")
+
 set(OpenCV_DIR ${BINARY_DIR} CACHE PATH "OpenCV build directory")
 
 

@@ -9,9 +9,11 @@ set(ES_BUILD_CONFIG_TYPES "Debug;Release" CACHE STRING "Build the given configs"
 option(BUILD_SHARED_LIBS "Build static or shared libs" OFF)
 option(ES_BUILD_ALL "Build all packages" ON)
 
+set(CMAKE_BUILD_TYPE Release)
+
 include(ProcessorCount)
 ProcessorCount(NUMBER_OF_PROCESSORS)
-# message(STATUS "Processor Count : ${NUMBER_OF_PROCESSORS}")
+message( "Processors = ${NUMBER_OF_PROCESSORS}")
 
 include(ExternalProject)
 
@@ -24,9 +26,9 @@ ExternalProject_Add(display
   UPDATE_COMMAND   ""
   PATCH_COMMAND    ""
   SOURCE_DIR       ${CMAKE_CURRENT_SOURCE_DIR}/..
-  BINARY_DIR       display_build
+  BINARY_DIR       ${CMAKE_CURRENT_SOURCE_DIR}/../build
   CMAKE_ARGS       -DOpenCV_DIR:PATH=${OpenCV_DIR}
-  INSTALL_COMMAND ""
+  INSTALL_COMMAND  ""
 )
 
 
