@@ -1,4 +1,4 @@
-cmake_minimum_required (VERSION 3.0)
+cmake_minimum_required (VERSION 3.6)
 
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_BINARY_DIR}/libraries" CACHE PATH "Path where to install binaries")
 
@@ -13,30 +13,36 @@ include(ProcessorCount)
 ProcessorCount(NUMBER_OF_PROCESSORS)
 # message(STATUS "Processor Count : ${NUMBER_OF_PROCESSORS}")
 
+include(ExternalProject)
+
 # OpenCV
-configure_file(superbuild/OpenCV-External.cmake
-               ${CMAKE_BINARY_DIR}/opencv-external/CMakeLists.txt)
-
-execute_process(COMMAND "${CMAKE_COMMAND}" -G "${CMAKE_GENERATOR}" .
-                WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv-external")
-
-execute_process(COMMAND "${CMAKE_COMMAND}" --build . 
-                -- -j${NUMBER_OF_PROCESSORS}
-                WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv-external")
+include(superbuild/OpenCV-External.cmake)
 
 
-set(OpenCV_DIR "${CMAKE_BINARY_DIR}/opencv_build")
+ExternalProject_Get_Property(opencv BINARY_DIR)
+message(STATUS "opencv build = ${BINARY_DIR}")
 
-find_package(OpenCV REQUIRED)
-if (NOT OPENCV_FOUND)
-  message(FATAL_ERROR "Cannot find OpenCV!")
-endif ()
+# set( "${BINARY_DIR}")
+# find_package(OpenCV REQUIRED)
+# if (NOT OPENCV_FOUND)
+#   message(FATAL_ERROR "Cannot find OpenCV!")
+# endif ()
 
-include_directories(${OpenCV_INCLUDE_DIRS})
+# include_directories(${OpenCV_INCLUDE_DIRS})
 
-add_executable(display display.cpp)
-target_link_libraries(display ${OpenCV_LIBS})
+# add_executable(display display.cpp)
+# target_link_libraries(display ${OpenCV_LIBS})
 
-
+ExternalProject_Add(display
+  DEPENDS opencv
+  DOWNLOAD_COMMAND ""
+  UPDATE_COMMAND ""
+  PATCH_COMMAND ""
+  SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}
+  BINARY_DIR build
+  CMAKE_ARGS
+    -DOpenCV_DIR:PATH=${OpenCV_DIR}
+  INSTALL_COMMAND ""
+)
 
 # EOF
