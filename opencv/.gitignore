@@ -1,4 +1,8 @@
 
 3rdparty/
 
+*_build/
+
+build/
+
 *copy*.*
