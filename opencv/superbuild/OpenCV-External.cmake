@@ -1,8 +1,4 @@
-cmake_minimum_required (VERSION 3.6)
-
-include(ExternalProject)
-
-# project(opencv-external)
+message("External project - OpenCV")
 
 set(OPENCV_CMAKE_ARGS 
   -DBUILD_DOCS:BOOL=OFF
@@ -24,7 +20,6 @@ set(OPENCV_CMAKE_ARGS
 )
 
 # OpeCV modules
-set(OPENCV_CMAKE_ARGS "")
 list(APPEND
   OPENCV_CMAKE_ARGS
   -DBUILD_opencv_java:BOOL=OFF
@@ -55,6 +50,8 @@ list(APPEND
   -DBUILD_opencv_python_bindings_generator:BOOL=OFF
 )
 
+include(ExternalProject)
+
 # OpenCV contrib
 ExternalProject_Add(opencv-contrib-download
   URL                  "https://github.com/opencv/opencv_contrib/archive/3.4.0.tar.gz"
@@ -72,7 +69,7 @@ ExternalProject_Add(opencv-contrib-download
 )
 
 ExternalProject_Get_Property(opencv-contrib-download SOURCE_DIR)
-message(STATUS "opencv_contrib = ${SOURCE_DIR}")
+message( "opencv_contrib = ${SOURCE_DIR}")
 
 # OpeCV contrib modules
 list(APPEND
@@ -113,8 +110,9 @@ list(APPEND
   -DBUILD_opencv_xobjdetect:BOOL=OFF
   -DBUILD_opencv_xphoto:BOOL=OFF
 )
-message(STATUS "OPENCV_CMAKE_ARGS = ${OPENCV_CMAKE_ARGS}")
+message( "OPENCV_CMAKE_ARGS = ${OPENCV_CMAKE_ARGS}")
 
+set(_config ${CMAKE_BUILD_TYPE})
 ExternalProject_Add(opencv
   URL                  "https://github.com/opencv/opencv/archive/3.4.0.tar.gz"
   # URL_HASH             MD5=
@@ -129,12 +127,15 @@ ExternalProject_Add(opencv
   INSTALL_COMMAND      ""
   TEST_COMMAND         ""
   CMAKE_ARGS          
-    -DCMAKE_BUILD_TYPE:STRING=Release
+    -DCMAKE_BUILD_TYPE:STRING=${_config}
     ${OPENCV_CMAKE_ARGS}
+  BUILD_COMMAND        ${CMAKE_COMMAND} -E echo "====================== Starting ${_config} build of OpenCV ======================"
+  COMMAND              ${CMAKE_COMMAND} --build . --config ${_config} -- -j${NUMBER_OF_PROCESSORS}
+  COMMAND              ${CMAKE_COMMAND} -E echo "====================== ${_config} build of OpenCV complete ======================"
 )
+ExternalProject_Get_Property(opencv BINARY_DIR)
+message( "opencv build = ${BINARY_DIR}")
+set(OpenCV_DIR ${BINARY_DIR} CACHE PATH "OpenCV build directory")
 
-  # BUILD_COMMAND        ${CMAKE_COMMAND} -E echo "====================== Starting ${_config} build ======================"
-  # COMMAND              ${CMAKE_COMMAND} --build ${CMAKE_BINARY_DIR}/opencv_build --config ${_config}
-  # COMMAND              ${CMAKE_COMMAND} -E echo "====================== ${_config} build complete ======================"
 
 # EOF
