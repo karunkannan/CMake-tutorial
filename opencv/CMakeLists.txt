@@ -54,12 +54,12 @@ list(APPEND
         "-DBUILD_opencv_videoio:BOOL=ON"
         "-DBUILD_opencv_world:BOOL=OFF"
         "-DBUILD_opencv_xfeatures2d:BOOL=OFF"
-        "-DOPENCV_EXTRA_MODULES_PATH:PATH=${CMAKE_BINARY_DIR}/opencv_contrib-src/modules"   
+        "-DOPENCV_EXTRA_MODULES_PATH:PATH=${CMAKE_BINARY_DIR}/opencv_contrib-src/modules"
     )
 
 
 
-set(OpenCV_DIR "${CMAKE_CURRENT_SOURCE_DIR}/build_dir/opencv-build/")
+set(OpenCV_DIR "${CMAKE_BINARY_DIR}/opencv-build/")
 find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 add_executable(display display.cpp)

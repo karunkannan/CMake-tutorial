@@ -8,4 +8,5 @@ ExternalProject_Add(
     GIT_TAG "3.4.0"
 
     SOURCE_DIR "${CMAKE_BINARY_DIR}/opencv_contrib-src"
+    BINARY_DIR "${CMAKE_BINARY_DIR}/opencv_contrib-build"
 )
