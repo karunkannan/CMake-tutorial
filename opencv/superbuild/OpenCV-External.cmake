@@ -1,3 +1,7 @@
+cmake_minimum_required (VERSION 3.6)
+
+project(OpenCV-External)
+
 message("\nExternal project - OpenCV")
 
 list(APPEND
