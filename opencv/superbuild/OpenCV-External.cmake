@@ -4,7 +4,6 @@ include(ExternalProject)
 
 project(opencv-external NONE)
 
-
 ExternalProject_Add(
   opencv_contrib_download
   URL                  "https://github.com/opencv/opencv_contrib/archive/3.4.0.tar.gz"
@@ -20,15 +19,6 @@ ExternalProject_Add(
   INSTALL_COMMAND      ""
   TEST_COMMAND         ""
 )
-
-set(OPENCV_CMAKE_ARGS "")
-list(APPEND
-  OPENCV_CMAKE_ARGS
-)
-
-# list(APPEND
-#     OPENCV_CMAKE_ARGS
-# )
 
 ExternalProject_Add(
   opencv
@@ -124,8 +114,6 @@ ExternalProject_Add(
     -DBUILD_opencv_xobjdetect:BOOL=OFF
     -DBUILD_opencv_xphoto:BOOL=OFF
 )
-#better not to use CMAKE_ARGS
-#define the arguments before using, move the list above
-#replace the CMAKE_ARGS with the list defined
-#Future: Don't use reserved word as variables for safety
 
+
+# EOF

@@ -25,7 +25,7 @@ execute_process(COMMAND "${CMAKE_COMMAND}" --build .
                 WORKING_DIRECTORY "${CMAKE_BINARY_DIR}/opencv-external")
 
 
-set(OpenCV_DIR "${CMAKE_BINARY_DIR}/opencv_build" CACHE STRING "OpenCV directory" FORCE)
+set(OpenCV_DIR "${CMAKE_BINARY_DIR}/opencv_build")
 
 find_package(OpenCV REQUIRED)
 if (NOT OPENCV_FOUND)
@@ -36,6 +36,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_executable(display display.cpp)
 target_link_libraries(display ${OpenCV_LIBS})
+
 
 
 # EOF
