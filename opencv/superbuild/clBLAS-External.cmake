@@ -35,7 +35,7 @@ ExternalProject_Add(clblas
 ExternalProject_Get_Property(clblas SOURCE_DIR)
 message( "clBLAS = ${SOURCE_DIR}")
 
-set(clBLAS_DIR "${SOURCE_DIR}/lib64/cmake/clBLAS" CACHE PATH "clBLAS build directory")
+set(clBLAS_DIR "${SOURCE_DIR}/CMake" CACHE PATH "clBLAS build directory")
 message( "clBLAS build = ${clBLAS_DIR}")
 
 
