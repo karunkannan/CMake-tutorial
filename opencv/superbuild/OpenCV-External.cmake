@@ -151,7 +151,7 @@ ExternalProject_Add(opencv
     -DCMAKE_BUILD_TYPE:STRING=${_config}
     ${OPENCV_CMAKE_ARGS}
   BUILD_COMMAND        ${CMAKE_COMMAND} -E echo "====================== Starting ${_config} build of OpenCV ======================"
-  COMMAND              ${CMAKE_COMMAND} --build . --config ${_config} -- -j${NUMBER_OF_PROCESSORS}
+  COMMAND              ${CMAKE_COMMAND} --build . --config ${_config}
   COMMAND              ${CMAKE_COMMAND} -E echo "====================== ${_config} build of OpenCV complete ======================"
 )
 
